@@ -7,7 +7,7 @@ function Dashboard() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8080/dashboard", {
+    axios.get("https://your-backend.onrender.com/dashboard", {
       withCredentials: true
     })
     .then(res => {
@@ -16,7 +16,7 @@ function Dashboard() {
     .catch(() => {
       navigate("/");
     });
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
