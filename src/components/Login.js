@@ -7,17 +7,35 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await axios.post(
-      "https:https://backend-tquc.onrender.com/login",
-      user,
-      { withCredentials: true } // 🔥 session
-    );
+    // ✅ simple validation
+    if (!user.email || !user.password) {
+      alert("Please enter email and password");
+      return;
+    }
 
-    if (res.data !== "Invalid") {
-      sessionStorage.setItem("role", res.data);
-      navigate("/dashboard");
-    } else {
-      alert("Invalid Credentials");
+    try {
+      const res = await axios.post(
+        "https://backend-tquc.onrender.com/login",
+        user
+      );
+
+      if (res.data !== "Invalid") {
+        sessionStorage.setItem("role", res.data);
+        navigate("/dashboard");
+      } else {
+        alert("Invalid Credentials");
+      }
+
+    } catch (error) {
+      console.error("Login Error:", error);
+
+      if (error.response) {
+        alert("Error: " + error.response.data);
+      } else if (error.request) {
+        alert("No response from server");
+      } else {
+        alert("Login failed");
+      }
     }
   };
 
@@ -26,11 +44,16 @@ function Login() {
       <h2>Login</h2>
       <h1>TEST DEPLOY</h1>
 
-      <input placeholder="Email"
-        onChange={e => setUser({...user, email:e.target.value})} />
+      <input
+        placeholder="Email"
+        onChange={e => setUser({ ...user, email: e.target.value })}
+      />
 
-      <input type="password" placeholder="Password"
-        onChange={e => setUser({...user, password:e.target.value})} />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={e => setUser({ ...user, password: e.target.value })}
+      />
 
       <button onClick={handleLogin}>Login</button>
 

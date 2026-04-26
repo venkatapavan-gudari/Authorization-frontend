@@ -8,7 +8,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios.get("https://backend-tquc.onrender.com/dashboard", {
-      withCredentials: true
+      
     })
     .then(res => {
       setMessage(res.data);
