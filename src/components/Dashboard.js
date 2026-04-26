@@ -7,7 +7,7 @@ function Dashboard() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    axios.get("https://your-backend.onrender.com/dashboard", {
+    axios.get("https://backend-tquc.onrender.com/dashboard", {
       withCredentials: true
     })
     .then(res => {

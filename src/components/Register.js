@@ -13,7 +13,7 @@ function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    await axios.post("https://your-backend.onrender.com/register", user);
+    await axios.post("https://backend-tquc.onrender.com/register", user);
     alert("Registered Successfully");
     navigate("/");
   };
